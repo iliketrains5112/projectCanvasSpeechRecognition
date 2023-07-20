@@ -11,9 +11,7 @@ var SpeechRecognition = window.webkitSpeechRecognition;
   
 var recognition = new SpeechRecognition();
 
-function preload(){
-  apple = loadImage("apple.png");
-}
+
 
 function start()
 {
@@ -22,9 +20,11 @@ function start()
 } 
  
 recognition.onresult = function(event) {
-
+console.log(event);
+content = event.results[0][0].transcript;
   to_number=Number(content);
-  if(Number(isInteger(to_number))){
+  console.log(to_number);
+  if(isInteger(to_number)){
     document.getElementById("status").innerHTML="Started drawing apple";
     draw_apple="set";
   }
@@ -33,10 +33,11 @@ recognition.onresult = function(event) {
   }
  console.log(event); 
 
- content = event.results[0][0].transcript;
-
     document.getElementById("status").innerHTML = "The speech has been recognized: " + content; 
 
+}
+function preload(){
+  apple = loadImage("apple.png");
 }
 
 function setup() {
